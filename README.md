@@ -21,17 +21,29 @@
 | 5. Мультиагентный разработчик | Код через связку Архитектор → Критик → Оптимизатор |
 | 6. Red Team | Атакующий аудит на edge cases и уязвимости, финальные фиксы |
 
-Агент не переходит к следующему этапу без явного подтверждения результатов текущего.
+Для небольших задач есть сокращённый режим — без пошаговых подтверждений, одним компактным ответом. Полный режим — с явным подтверждением после каждого этапа. Подробности и критерии выбора — в самом [SKILL.md](SKILL.md).
 
 ## Установка
 
 Claude Code подхватывает скиллы из `~/.claude/skills/<имя>/SKILL.md`.
+
+**macOS / Linux:**
 
 ```bash
 git clone https://github.com/lanschikovdn/claude-project-architect-skill.git
 mkdir -p ~/.claude/skills/project-architect
 cp claude-project-architect-skill/SKILL.md ~/.claude/skills/project-architect/SKILL.md
 ```
+
+**Windows (PowerShell):**
+
+```powershell
+git clone https://github.com/lanschikovdn/claude-project-architect-skill.git
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\project-architect"
+Copy-Item claude-project-architect-skill\SKILL.md "$env:USERPROFILE\.claude\skills\project-architect\SKILL.md"
+```
+
+Файл должен лежать строго по пути `<домашняя папка>\.claude\skills\project-architect\SKILL.md` — имя папки не важно, но она должна быть одна на скилл и содержать `SKILL.md`.
 
 После этого в Claude Code скилл появится в списке доступных и будет предложен автоматически, когда вы попросите спроектировать, разработать или улучшить проект — либо вызывается явно:
 
@@ -41,9 +53,14 @@ cp claude-project-architect-skill/SKILL.md ~/.claude/skills/project-architect/SK
 
 ## Когда применять
 
-- Проектирование IT-продукта, автоматизации, регламента или базы знаний с нуля
+- Архитектура приложений/систем, мультиагентные автоматизации (n8n/Make/Flowise), базы знаний, GitHub-структуры проектов, AI-агенты, production/workflow-процессы
 - Отладка/улучшение существующей системы, бизнес-процесса или кода
-- Любая задача, где важно не перепрыгивать сразу к решению, а сначала зафиксировать архитектуру и риски
+
+## Когда НЕ применять
+
+- Простая правка текста, короткий одноразовый скрипт, мелкая настройка
+- Есть готовое ТЗ и архитектура не требуется
+- Задачу проще решить напрямую, без цепочки этапов
 
 ## Лицензия
 
